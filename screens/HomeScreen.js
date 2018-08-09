@@ -40,21 +40,20 @@ export default class TableScreen extends React.Component {
   render() {    
     return (
       <View style={styles.container}>
-      <View>
         <Modal
           animationType="slide"
           transparent={false}
           visible={this.state.modalVisible}
           onRequestClose = {()=>{}}
-          >
+        >
           <View style={{margin: 5}}>
-          <TouchableHighlight
-          onPress={() => {
-            this.setModalVisible(false);
-          }}>
-          <Text style={{fontSize: 25, textAlign:'right'}}>X</Text>
-        </TouchableHighlight>
-              <ScrollView>
+            <TouchableHighlight
+              onPress={() => {
+                this.setModalVisible(false);
+              }}>
+              <Text style={{fontSize: 25, textAlign:'right'}}>X</Text>
+            </TouchableHighlight>
+            <ScrollView>
               <FlatList
                 style={{ flex: 8 }}
                 initialNumToRender={3}
@@ -234,80 +233,40 @@ export default class TableScreen extends React.Component {
                 </Text>
               </View>
             </ScrollView>
-            </View>
+          </View>
         </Modal>
-      </View>
         <View style={styles.main}>
-          <View style={{ flex: 1, justifyContent: 'space-between', flexDirection: 'row',  paddingLeft: 20 }}>
-            <View style={{ marginTop: 20 }}>
-              <Text style={{ color: 'white', fontSize: 14 }}>Table No.</Text>
-                <View style={{ flexDirection: 'row'}}>
-                  <CoskaButton 
-                    label="1"
-                    onPress={() => {
-                      this.setModalVisible(true, 1);
-                    }}
-                  />
-                  <CoskaButton
-                    label="2"
-                    onPress={() => {
-                      this.setModalVisible(true, 2);
-                    }}
-                  />
-                  <CoskaButton
-                    label="3"
-                    onPress={() => {
-                      this.props.navigation.navigate('Home',{
-                        staff:this.props.navigation.state.params.staff, 
-                        table:"3"}); 
-                    }}
-                  />
-                </View>
-                <View style={{flexDirection: 'row'}}>
-                   <CoskaButton
-                    label="4"
-                    onPress={() => {
-                      this.props.navigation.navigate('Home',{
-                        staff:this.props.navigation.state.params.staff, 
-                        table:"4"}); 
-                    }}
-                  />
-                   <CoskaButton
-                    label="5"
-                    onPress={() => {
-                      this.props.navigation.navigate('Home',{
-                          staff:this.props.navigation.state.params.staff, 
-                          table:"5"}); 
-                    }}
-                  />
-                   <CoskaButton
-                    label="6"
-                    onPress={() => {
-                      this.props.navigation.navigate('Home',{
-                        staff:this.props.navigation.state.params.staff, 
-                        table:"6"}); 
-                    }}
-                  />
-                </View>
-                <View style={{flexDirection: 'row'}}>
-                  <CoskaButton 
-                    label="7"
-                    onPress={() => {
-                      this.props.navigation.navigate('Home',{
-                        staff:this.props.navigation.state.params.staff, 
-                        table:"7"}); 
-                    }}    
-                  />
-                  <CoskaButton
-                    label="8"  
-                    onPress={() => {
-                      this.props.navigation.navigate('Home', {
-                        staff:this.props.navigation.state.params.staff, 
-                        table:"8"}); 
-                    }}
-                  />
-                </View>
-            </View>
+          <View style={{ flex: 1 }}>
+            <Text style={{ color: 'white', fontSize: 20 }}>IN-EAT</Text>
+            <FlatList
+              data={[1,2,3,4,5,6,7,8]}
+              renderItem={({item, index}) => (
+                <CoskaButton 
+                  key={index}
+                  label={item}
+                  onPress={() => {
+                    this.setModalVisible(true, item);
+                  }}
+                />
+              )}
+              keyExtractor={(_, index) => index.toString()}
+            />
+          </View>
+          <View style={{ flex: 1 }}>
+            <Text style={{ color: 'white', fontSize: 20 }}>TAKE OUT</Text>
+            <FlatList
+              data={[1,2,3,4,5,6,7,8]}
+              renderItem={({item, index}) => (
+                <CoskaButton 
+                  key={index}
+                  label={item}
+                  onPress={() => {
+                    this.setModalVisible(true, item);
+                  }}
+                />
+              )}
+              keyExtractor={(_, index) => index.toString()}
+            />
           </View>
         </View>
       </View>
@@ -334,7 +293,8 @@ const styles = StyleSheet.create({
     fontWeight: "100"
   },
   main: {
-    flex: 3
+    flex: 1,
+    flexDirection: 'row'
   },
   status: {
     flexDirection: "row"
