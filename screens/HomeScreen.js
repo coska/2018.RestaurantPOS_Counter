@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet, Modal, TouchableHighlight, ScrollView, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Modal, TouchableHighlight, ScrollView, FlatList } from 'react-native';
 import CoskaButton from '../components/CoskaButton';
-//import { LinearGradient } from 'expo';
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 export default class TableScreen extends React.Component {
   state = {
@@ -39,7 +40,8 @@ export default class TableScreen extends React.Component {
   }
   render() {    
     return (
-      <View style={styles.container}>
+      <View style={styles.container}>      
+        <Header />
         <Modal
           animationType="slide"
           transparent={false}
@@ -269,6 +271,7 @@ export default class TableScreen extends React.Component {
             />
           </View>
         </View>
+        <Footer />
       </View>
     );
   }
@@ -278,7 +281,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#0d0d0d",
-    flexDirection: "row"
+    justifyContent: 'space-between'
   },
   tableRow: {
     flexDirection: "row",
