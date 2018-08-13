@@ -11,12 +11,14 @@ export default class Button extends React.Component {
   }
   render() {
     const {
-      name, onPress, containerStyle, textContainerStyle,
-      toggledTextContainer, text, toggledText,
+      name, onPress, style: {
+        common, textContainerStyle,
+        toggledTextContainer, text, toggledText,
+      },
     } = this.props.buttonInfo
     const { pressed } = this.state
     return (
-      <View style={containerStyle} key={name}>
+      <View style={common} key={name}>
         <TouchableHighlight
           onPress={onPress}
           activeOpacity={1}
