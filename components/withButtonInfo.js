@@ -1,62 +1,73 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
 
+function styleProvider() {
+  const {
+    common,
+    textContainerStyle,
+    text,
+    toggledTextContainer,
+    toggledText,
+  } = styles
+  return {
+    common,
+    textContainerStyle,
+    text,
+    toggledTextContainer,
+    toggledText,
+  }
+}
+
 export default function (Component) {
   function Wrapper(props) {
+    const {
+      common, toggledText, toggledExitButton, exitText, exitButton,
+    } = styles
+
+    const { screenSwitcher } = props
+
     const buttonInfo = [
       {
         name: 'Order List',
-        onPress: () => {},
-        containerStyle: styles.common,
-        textContainerStyle: styles.textContainer,
-        text: styles.text,
-        toggledTextContainer: styles.toggledContainer,
-        toggledText: styles.toggledText,
+        onPress: () => { screenSwitcher('') },
+        style: styleProvider(),
       },
       {
         name: 'Table Setup',
-        onPress: () => {},
-        containerStyle: styles.common,
-        textContainerStyle: styles.textContainer,
-        text: styles.text,
-        toggledTextContainer: styles.toggledContainer,
-        toggledText: styles.toggledText,
+        onPress: () => { screenSwitcher('TableSetup') },
+        style: styleProvider(),
       },
       {
         name: 'Menu Setup',
-        onPress: () => {},
-        containerStyle: styles.common,
-        textContainerStyle: styles.textContainer,
-        text: styles.text,
-        toggledTextContainer: styles.toggledContainer,
-        toggledText: styles.toggledText,
+        onPress: () => { screenSwitcher('MenuSetup') },
+        style: styleProvider(),
       },
       {
         name: 'User Setup',
-        onPress: () => {},
-        containerStyle: styles.common,
-        textContainerStyle: styles.textContainer,
-        text: styles.text,
-        toggledTextContainer: styles.toggledContainer,
-        toggledText: styles.toggledText,
+        onPress: () => { screenSwitcher('UserSetup') },
+        style: styleProvider(),
       },
       {
         name: '',
         onPress: () => {},
-        containerStyle: { flex: 1 },
-        textContainerStyle: { flex: 1 },
+        style: {
+          common: { flex: 1 },
+          textContainerStyle: { flex: 1 },
+        },
       },
       {
         name: 'Exit',
         onPress: () => {},
-        containerStyle: styles.common,
-        textContainerStyle: styles.exitButton,
-        text: styles.exitText,
-        toggledTextContainer: styles.toggledExitButton,
-        toggledText: styles.toggledText,
+        style: {
+          common,
+          textContainerStyle: exitButton,
+          text: exitText,
+          toggledTextContainer: toggledExitButton,
+          toggledText,
+        },
       },
     ]
-    return <Component buttonInfo={buttonInfo} {...props} />
+    return <Component {...props} buttonInfo={buttonInfo} />
   }
   return Wrapper
 }
@@ -66,7 +77,7 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     flex: 1,
   },
-  textContainer: {
+  textContainerStyle: {
     justifyContent: 'center',
     alignItems: 'center',
     height: 45,
@@ -90,7 +101,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
-  toggledContainer: {
+  toggledTextContainer: {
     justifyContent: 'center',
     alignItems: 'center',
     height: 45,
