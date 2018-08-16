@@ -7,11 +7,11 @@ export default class CoskaButton extends React.Component {
       <TouchableOpacity
         onPress={this.props.onPress}
       >
-        <View style={{ 
-          backgroundColor: '#225447', 
-          margin:5, 
-          paddingVertical: 20, 
-          paddingHorizontal: 20, 
+        <View style={{
+          backgroundColor: '#225447',
+          margin:5,
+          paddingVertical: 20,
+          paddingHorizontal: 20,
           alignItems: 'center'
         }}>
           <Text style={{ color: 'white', fontSize: 20 }}>{this.props.label}</Text>
