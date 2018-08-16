@@ -1,9 +1,11 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import Modal from 'react-native-modal'
-import LineBreaker from './LineBreaker'
-import ModalButtons from './ModalButtons'
-import UserList from './UserList'
+import LineBreaker from '../components/LineBreaker'
+import ModalButtons from '../components/ModalButtons'
+import UserList from '../components/UserList'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 
 class UserSetup extends React.Component {
@@ -33,11 +35,12 @@ class UserSetup extends React.Component {
     const {
       container, sectionTitle, modalTitle, nameLabel, lableAsterisk,
       nameInputStyle, phoneLabel, phoneInputStyle, descLable,
-      descInputStyle,
+      descInputStyle, userList,
     } = styles
     const { inputName, inputPhone, inputDesc } = this.state
     return (
       <View style={container}>
+        <Header />
         <Modal
           isVisible={this.state.modalVisible}
           style={{ flex: 1, alignItems: 'center' }}
@@ -110,10 +113,12 @@ class UserSetup extends React.Component {
           {'STAFFS'}
         </Text>
         <UserList
+          style={userList}
           modalToggler={this.modalToggler}
           onEdit={this.onEditStaff}
           onDelete={() => {}}
         />
+        <Footer navigation={this.props.navigation} />
       </View>
     )
   }
@@ -124,6 +129,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#161616',
+    // paddingTop: 10,
+    // paddingLeft: 10,
+    // paddingRight: 10,
+    // paddingBottom: 10,
+  },
+  userList: {
     paddingTop: 10,
     paddingLeft: 10,
     paddingRight: 10,

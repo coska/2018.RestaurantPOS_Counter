@@ -23,28 +23,25 @@ export default function (Component) {
     const {
       common, toggledText, toggledExitButton, exitText, exitButton,
     } = styles
-
-    const { screenSwitcher } = props
-
     const buttonInfo = [
       {
         name: 'Order List',
-        onPress: () => { screenSwitcher('') },
+        onPress: () => { props.navigation.navigate('Home') },
         style: styleProvider(),
       },
       {
         name: 'Table Setup',
-        onPress: () => { screenSwitcher('TableSetup') },
+        onPress: () => {},
         style: styleProvider(),
       },
       {
         name: 'Menu Setup',
-        onPress: () => { screenSwitcher('MenuSetup') },
+        onPress: () => { },
         style: styleProvider(),
       },
       {
         name: 'User Setup',
-        onPress: () => { screenSwitcher('UserSetup') },
+        onPress: () => { props.navigation.navigate('UserSetup') },
         style: styleProvider(),
       },
       {

@@ -26,7 +26,7 @@ export default (props) => {
     staffAddButton,
   } = styles
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <View style={listContainer}>
         {(() => dummy.map(data => (
           <View key={data.name} style={{ flexDirection: 'row' }}>

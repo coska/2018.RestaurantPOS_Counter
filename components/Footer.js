@@ -19,5 +19,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 60,
     flexDirection: 'row',
-  }
+  },
 })

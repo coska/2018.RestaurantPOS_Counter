@@ -3,11 +3,9 @@ import { View, Text, StyleSheet, Modal, TouchableHighlight, ScrollView, FlatList
 import CoskaButton from '../components/CoskaButton'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import UserSetup from '../components/UserSetup'
 
 export default class TableScreen extends React.Component {
   state = {
-    renderScreen: '',
     total: 0,
     discount: 0,
     modalVisible: false,
@@ -40,9 +38,9 @@ export default class TableScreen extends React.Component {
     })
     this.setState({ modalVisible: visible })
   }
-  screenSwitcher = (screen) => {
-    this.setState({ renderScreen: screen })
-  }
+  // screenSwitcher = (screen) => {
+  //   this.setState({ renderScreen: screen })
+  // }
   render() {
     return (
       <View style={styles.container}>
@@ -244,52 +242,39 @@ export default class TableScreen extends React.Component {
             </ScrollView>
           </View>
         </Modal>
-        {
-          (() => {
-            const { renderScreen } = this.state
-            if (renderScreen === '') {
-              return (
-                <View style={styles.main}>
-                  <View style={{ flex: 1 }}>
-                    <Text style={{ color: 'white', fontSize: 20 }}>IN-EAT</Text>
-                    <FlatList
-                      data={[1, 2, 3, 4, 5, 6, 7, 8]}
-                      renderItem={({ item, index }) => (
-                        <CoskaButton
-                          key={index}
-                          label={item}
-                          onPress={() => {
+        <View style={styles.main}>
+          <View style={{ flex: 1 }}>
+            <Text style={{ color: 'white', fontSize: 20 }}>IN-EAT</Text>
+            <FlatList
+              data={[1, 2, 3, 4, 5, 6, 7, 8]}
+              renderItem={({ item, index }) => (
+                <CoskaButton
+                  key={index}
+                  label={item}
+                  onPress={() => {
                             this.setModalVisible(true, item)
                           }}
-                        />
+                />
                       )}
-                      keyExtractor={(_, index) => index.toString()}
-                    />
-                  </View>
-                  <View style={{ flex: 1 }}>
-                    <Text style={{ color: 'white', fontSize: 20 }}>TAKE OUT</Text>
-                    <FlatList
-                      data={[1, 2, 3, 4, 5, 6, 7, 8]}
-                      renderItem={({ item, index }) => (
-                        <CoskaButton
-                          key={index}
-                          label={item}
-                          onPress={() => {
-                            this.setModalVisible(true, item)
-                          }}
-                        />
-                    )}
-                      keyExtractor={(_, index) => index.toString()}
-                    />
-                  </View>
-                </View>
-              )
-            } else if (renderScreen === 'UserSetup') {
-              return <UserSetup />
-            }
-          })()
-        }
-        <Footer screenSwitcher={this.screenSwitcher} />
+              keyExtractor={(_, index) => index.toString()}
+            />
+          </View>
+          <View style={{ flex: 1 }}>
+            <Text style={{ color: 'white', fontSize: 20 }}>TAKE OUT</Text>
+            <FlatList
+              data={[1, 2, 3, 4, 5, 6, 7, 8]}
+              renderItem={({ item, index }) => (
+                <CoskaButton
+                  key={index}
+                  label={item}
+                  onPress={() => { this.setModalVisible(true, item) }}
+                />
+              )}
+              keyExtractor={(_, index) => index.toString()}
+            />
+          </View>
+        </View>
+        <Footer navigation={this.props.navigation} />
       </View>
     )
   }
