@@ -15,17 +15,17 @@ function styleProvider() {
   }
 }
 
-export default props => (
+export default ({ onSave, onCancel }) => (
   <View style={{ flex: 1 }}>
     {[
       {
         name: 'SAVE',
-        onPress: () => props.onSave(),
+        onPress: () => onSave(),
         style: styleProvider(),
       },
       {
         name: 'CANCEL',
-        onPress: () => props.onCancel(),
+        onPress: () => onCancel(),
         style: styleProvider(),
       },
       ].map(button => <Button buttonInfo={button} key={button.name} />)

@@ -19,14 +19,14 @@ function styleProvider() {
 }
 
 export default function (Component) {
-  function Wrapper(props) {
+  function Wrapper({ navigate, ...props }) {
     const {
       common, toggledText, toggledExitButton, exitText, exitButton,
     } = styles
     const buttonInfo = [
       {
         name: 'Order List',
-        onPress: () => { props.navigation.navigate('Home') },
+        onPress: () => { navigate('Home') },
         style: styleProvider(),
       },
       {
@@ -36,12 +36,12 @@ export default function (Component) {
       },
       {
         name: 'Menu Setup',
-        onPress: () => { },
+        onPress: () => { navigate('MenuSetup') },
         style: styleProvider(),
       },
       {
         name: 'User Setup',
-        onPress: () => { props.navigation.navigate('UserSetup') },
+        onPress: () => { navigate('UserSetup') },
         style: styleProvider(),
       },
       {

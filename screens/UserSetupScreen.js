@@ -118,7 +118,7 @@ class UserSetup extends React.Component {
           onEdit={this.onEditStaff}
           onDelete={() => {}}
         />
-        <Footer navigation={this.props.navigation} />
+        <Footer navigate={this.props.navigation.navigate} />
       </View>
     )
   }
@@ -129,10 +129,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#161616',
-    // paddingTop: 10,
-    // paddingLeft: 10,
-    // paddingRight: 10,
-    // paddingBottom: 10,
   },
   userList: {
     paddingTop: 10,

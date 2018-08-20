@@ -274,7 +274,7 @@ export default class TableScreen extends React.Component {
             />
           </View>
         </View>
-        <Footer navigation={this.props.navigation} />
+        <Footer navigate={this.props.navigation.navigate} />
       </View>
     )
   }
