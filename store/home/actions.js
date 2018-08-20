@@ -19,3 +19,4 @@ export const deleteStaff = staffName => (dispatch) => {
   // Add API call
   dispatch({ type: types.DELETE_STAFF, staffName })
 }
+
