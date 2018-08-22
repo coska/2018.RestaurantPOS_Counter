@@ -7,14 +7,14 @@ import UserSetup from '../components/UserSetup'
 
 export default class TableScreen extends React.Component {
   state = {
-    renderScreen: '',
+    renderScreen: 'OrderList',
     total: 0,
     discount: 0,
     modalVisible: false,
     items: [{
       table: 1,
-      name: 'Dummy1',
-      qty: 2,
+      name: 'Dummy1',  
+      qty: 2, 
       price: 15,
     }, {
       table: 1,
@@ -28,6 +28,7 @@ export default class TableScreen extends React.Component {
       price: 12,
     }],
     selectedItems: [],
+    tableNo: [1,2]
   };
   setModalVisible(visible, tableNum) {
     this.state.total = 0
@@ -58,8 +59,8 @@ export default class TableScreen extends React.Component {
             <TouchableHighlight
               onPress={() => {
                 this.setModalVisible(false)
-              }}
-            >
+              }} 
+            > 
               <Text style={{ fontSize: 25, textAlign: 'right' }}>X</Text>
             </TouchableHighlight>
             <ScrollView>
@@ -247,13 +248,13 @@ export default class TableScreen extends React.Component {
         {
           (() => {
             const { renderScreen } = this.state
-            if (renderScreen === '') {
+            if (renderScreen === 'OrderList') { 
               return (
                 <View style={styles.main}>
                   <View style={{ flex: 1 }}>
                     <Text style={{ color: 'white', fontSize: 20 }}>IN-EAT</Text>
                     <FlatList
-                      data={[1, 2, 3, 4, 5, 6, 7, 8]}
+                      data={this.state.tableNo}
                       renderItem={({ item, index }) => (
                         <CoskaButton
                           key={index}
@@ -269,9 +270,9 @@ export default class TableScreen extends React.Component {
                   <View style={{ flex: 1 }}>
                     <Text style={{ color: 'white', fontSize: 20 }}>TAKE OUT</Text>
                     <FlatList
-                      data={[1, 2, 3, 4, 5, 6, 7, 8]}
+                      data={this.state.tableNo}
                       renderItem={({ item, index }) => (
-                        <CoskaButton
+                        <CoskaButton 
                           key={index}
                           label={item}
                           onPress={() => {
@@ -284,10 +285,72 @@ export default class TableScreen extends React.Component {
                   </View>
                 </View>
               )
+            } else if (renderScreen === 'TableSetup') {
+              const { tableNo } = this.state;
+              return (
+                <View style={styles.main}>
+                <View style={{ flex: 1 }}>
+                  <FlatList
+                    data={tableNo}
+                    extraData={this.state} 
+                    renderItem={({ item, index }) => (
+                      <View style={{flex:10, flexDirection:'row'}}>  
+                        <View style={{flex:9}}>  
+                      <CoskaButton 
+                        key={index}
+                        label={item} 
+                      />
+                      </View>
+                      <View style={{
+                        backgroundColor: '#225447',
+                        margin:5,
+                        paddingVertical: 20,
+                        paddingHorizontal: 20,
+                        alignItems: 'center' , 
+                      }}> 
+                      <TouchableHighlight 
+                        onPress={() => {  
+                          let length=this.state.items.length;
+                          let changed=false;
+                          for (let i = length-1; i >= 0 ; i--) {
+                            const element = this.state.items[i];  
+                            if(element.table==(index+1)){
+                              this.state.items.splice(i,1);  
+                              if(!changed){
+                                for (let j = i; j < length-1 ; j++) {
+                                  this.state.items[j].table -= 1;
+                                }
+                                changed=true;
+                              }
+                            } 
+                          } 
+                          tableNo.splice(tableNo.length-1,1);  
+                          this.setState({tableNo}); 
+                        }}  
+                      >
+                        <Text style={{ color: 'white' ,fontSize: 15, textAlign: 'right' }}>Delete</Text>
+                      </TouchableHighlight> 
+                      </View>  
+                      </View>
+
+                    )}
+                    keyExtractor={(_, index) => index.toString()}
+                  />
+                  <CoskaButton
+                    key='add'
+                    label='Add Table'
+                    onPress={() => {
+                      tableNo[tableNo.length]=tableNo.length+1;
+                      this.setState({tableNo}); 
+                    }} 
+                  />
+                </View> 
+              </View>  
+              ) 
             } else if (renderScreen === 'UserSetup') {
               return <UserSetup />
-            }
-          })()
+            }  
+          })() 
         }
         <Footer screenSwitcher={this.screenSwitcher} />
       </View>
