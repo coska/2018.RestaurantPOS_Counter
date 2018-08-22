@@ -29,7 +29,7 @@ export default function (Component) {
     const buttonInfo = [
       {
         name: 'Order List',
-        onPress: () => { screenSwitcher('') },
+        onPress: () => { screenSwitcher('OrderList') },
         style: styleProvider(),
       },
       {
