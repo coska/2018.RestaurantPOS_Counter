@@ -4,6 +4,7 @@ import CoskaButton from '../components/CoskaButton'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import UserSetup from '../components/UserSetup'
+import TableSetup from '../components/TableSetup'
 
 export default class TableScreen extends React.Component {
   state = {
@@ -13,8 +14,8 @@ export default class TableScreen extends React.Component {
     modalVisible: false,
     items: [{
       table: 1,
-      name: 'Dummy1',
-      qty: 2,
+      name: 'Dummy1',  
+      qty: 2, 
       price: 15,
     }, {
       table: 1,
@@ -58,8 +59,8 @@ export default class TableScreen extends React.Component {
             <TouchableHighlight
               onPress={() => {
                 this.setModalVisible(false)
-              }}
-            >
+              }} 
+            > 
               <Text style={{ fontSize: 25, textAlign: 'right' }}>X</Text>
             </TouchableHighlight>
             <ScrollView>
@@ -286,8 +287,10 @@ export default class TableScreen extends React.Component {
               )
             } else if (renderScreen === 'UserSetup') {
               return <UserSetup />
-            }
-          })()
+            } else if (renderScreen === 'TableSetup') {
+              return <TableSetup /> 
+            }  
+          })() 
         }
         <Footer screenSwitcher={this.screenSwitcher} />
       </View>
