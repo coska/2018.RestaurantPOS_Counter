@@ -9,6 +9,8 @@
     "rules": {
       "react/jsx-filename-extension": [ 1, { "extensions": [ ".js", ".jsx" ] } ],
       "semi": ["error", "never"],
+      "linebreak-style": "off",
+      "no-use-before-define": "off",
       "react/prop-types": 0
     }
 }

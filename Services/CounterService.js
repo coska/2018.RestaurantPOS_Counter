@@ -32,6 +32,22 @@ class CounterService {
 
     return await response.json()
   }
+
+  async getOrders() {
+    const response = await fetch(`${REST_ENDPOINT}/orders`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    })
+
+    if (response.status && response.status !== 200) {
+      throw { statusCode: response.status }
+    }
+
+    return await response.json()
+  }
 }
 
 export default new CounterService()

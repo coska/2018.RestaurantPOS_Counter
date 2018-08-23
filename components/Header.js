@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { LinearGradient } from 'expo'
+import moment from 'moment'
 import Clock from './Clock'
 
 export default () => (
@@ -20,9 +21,7 @@ export default () => (
         <Clock
           render={({ time }) => (
             <Text style={styles.clock}>
-              {
-                `${time.getMonth() + 1}/${time.getDate()}/${time.getFullYear()} ${time.toLocaleTimeString().slice(0, 5)}`
-              }
+              {moment(time).utcOffset(-4).format('M/D/YYYY HH:mm')}
             </Text>
           )}
         />

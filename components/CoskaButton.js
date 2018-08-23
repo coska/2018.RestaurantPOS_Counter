@@ -1,23 +1,29 @@
-import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import React from 'react'
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 
-export default class CoskaButton extends React.Component {
-  render() {
-    return (
-      <TouchableOpacity
-        onPress={this.props.onPress}
-      >
-        <View style={{
-          backgroundColor: '#225447',
-          margin:5,
-          paddingVertical: 20,
-          paddingHorizontal: 20,
-          alignItems: 'center'
-        }}>
-          <Text style={{ color: 'white', fontSize: 20 }}>{this.props.label}</Text>
-        </View>
+const CoskaButton = (props) => (
+  <TouchableOpacity
+    onPress={props.onPress}
+  >
+    <View style={styles.button}>
+      <Text style={styles.text}>{props.label}</Text>
+    </View>
 
-      </TouchableOpacity>
-    );
-  }
-}
+  </TouchableOpacity>
+)
+
+export default CoskaButton
+
+const styles = StyleSheet.create({
+  button: {
+    backgroundColor: '#225447',
+    margin: 5,
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+    alignItems: 'center',
+  },
+  text: {
+    color: 'white',
+    fontSize: 20,
+  },
+})

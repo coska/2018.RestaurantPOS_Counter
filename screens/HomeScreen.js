@@ -1,10 +1,12 @@
 import React from 'react'
 import { View, Text, StyleSheet, Modal, TouchableHighlight, ScrollView, FlatList } from 'react-native'
+import { connect } from 'react-redux'
 import CoskaButton from '../components/CoskaButton'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import { getOrders } from '../store/home/actions'
 
-export default class TableScreen extends React.Component {
+class TableScreen extends React.Component {
   state = {
     total: 0,
     discount: 0,
@@ -41,6 +43,11 @@ export default class TableScreen extends React.Component {
   // screenSwitcher = (screen) => {
   //   this.setState({ renderScreen: screen })
   // }
+
+  componentWillMount() {
+    this.props.getOrders()
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -116,7 +123,7 @@ export default class TableScreen extends React.Component {
                   )}
                 data={this.state.selectedItems}
                 numColumns={1}
-                renderItem={({ item, index }) => (
+                renderItem={({ item }) => (
                   <View style={[styles.tableRow, { backgroundColor: '#000' }]}>
                     <View style={{ flex: 3.5, marginHorizontal: 1 }}>
                       <Text style={{ color: '#fff', fontSize: 18 }}>
@@ -244,30 +251,34 @@ export default class TableScreen extends React.Component {
         </Modal>
         <View style={styles.main}>
           <View style={{ flex: 1 }}>
-            <Text style={{ color: 'white', fontSize: 20 }}>IN-EAT</Text>
+            <Text style={{ color: '#54585f', fontSize: 20 }}>IN-EAT</Text>
             <FlatList
               data={[1, 2, 3, 4, 5, 6, 7, 8]}
+              numColumns={4}
               renderItem={({ item, index }) => (
                 <CoskaButton
                   key={index}
                   label={item}
                   onPress={() => {
-                            this.setModalVisible(true, item)
-                          }}
+                    this.setModalVisible(true, item)
+                  }}
+                  {...this.props}
                 />
-                      )}
+              )}
               keyExtractor={(_, index) => index.toString()}
             />
           </View>
           <View style={{ flex: 1 }}>
-            <Text style={{ color: 'white', fontSize: 20 }}>TAKE OUT</Text>
+            <Text style={{ color: '#54585f', fontSize: 20 }}>TAKE OUT</Text>
             <FlatList
               data={[1, 2, 3, 4, 5, 6, 7, 8]}
+              numColumns={4}
               renderItem={({ item, index }) => (
                 <CoskaButton
                   key={index}
                   label={item}
                   onPress={() => { this.setModalVisible(true, item) }}
+                  {...this.props}
                 />
               )}
               keyExtractor={(_, index) => index.toString()}
@@ -283,7 +294,7 @@ export default class TableScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0d0d0d',
+    backgroundColor: '#161616',
     justifyContent: 'space-between',
   },
   tableRow: {
@@ -301,6 +312,7 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     flexDirection: 'row',
+    padding: 20,
   },
   status: {
     flexDirection: 'row',
@@ -315,3 +327,14 @@ const styles = StyleSheet.create({
     color: '#09736f',
   },
 })
+
+const mapStateToProps = state => {
+  return {
+    orders: state.home.orders
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { getOrders }
+)(TableScreen);
